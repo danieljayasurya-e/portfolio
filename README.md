@@ -9,8 +9,8 @@
 
 > A modern, responsive personal portfolio showcasing my projects, skills, and experience as a Full Stack Developer
 
-[![Portfolio](https://img.shields.io/badge/🌐_Live_Demo-000000?style=for-the-badge)](https://your-portfolio-url.vercel.app)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/danieljayasurya)
+[![Portfolio](https://img.shields.io/badge/🌐_Live_Demo-000000?style=for-the-badge)](https://danieljayasurya.vercel.app)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/daniel-jayasurya-e-a0a25b1ba)
 </div>
 
 ---
