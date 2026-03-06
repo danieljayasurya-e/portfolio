@@ -19,7 +19,7 @@ const Index = () => {
       <ProjectsSection />
       <ContactSection />
       <Footer />
-      <AIChatAssistant />
+      <AIChatAssistant /> 
     </div>
   );
 };
