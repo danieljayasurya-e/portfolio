@@ -49,3 +49,11 @@ npm install
 
 # Start development server
 npm run dev
+
+<div align="center">
+
+Made with ❤️ by **Daniel Jayasurya E**
+
+⭐ Star this repo if you like it!
+
+</div>
