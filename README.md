@@ -50,6 +50,31 @@ npm install
 # Start development server
 npm run dev
 
+```
+
+---
+
+## 📁 Project Structure
+
+```
+portfolio/
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── assets/         # Images and static files
+│   └── App.tsx         # Root component
+├── public/
+└── index.html
+```
+
+---
+
+## 🌐 Deployment
+
+Deployed on **Vercel** — auto-deploys on every push to `main`.
+
+---
+
 <div align="center">
 
 Made with ❤️ by **Daniel Jayasurya E**
