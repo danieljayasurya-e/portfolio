@@ -7,25 +7,24 @@
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-> A modern, responsive personal portfolio showcasing my projects, skills, and experience as a Full Stack Developer.
+> A modern, responsive personal portfolio showcasing my projects, skills, and experience as a Full Stack Developer
 
-[🌐 Live Demo](https://your-portfolio-url.vercel.app) • [💼 LinkedIn](https://linkedin.com/in/danieljayasurya) • [📧 Contact Me](mailto:your@email.com)
-
+[🌐 Live Demo](https://your-portfolio-url.vercel.app) • [💼 LinkedIn](https://linkedin.com/in/danieljayasurya)
 </div>
 
 ---
 
 ## ✨ Features
 
-- 🎨 Clean, modern UI with smooth animations
-- 📱 Fully responsive across all devices
-- 🤖 AI-powered chat assistant integration
-- 🌙 Optimized performance with Vite
-- 🧩 Component-based architecture
+- Clean, modern UI with smooth animations
+- Fully responsive across all devices
+- AI-powered chat assistant integration
+- Optimized performance with Vite
+- Component-based architecture
 
 ---
 
-## 🛠️ Tech Stack
+## ⚙️ Tech Stack
 
 | Frontend | Styling | Tools |
 |----------|---------|-------|
