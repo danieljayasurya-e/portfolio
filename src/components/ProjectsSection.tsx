@@ -151,7 +151,7 @@ const ProjectsSection = () => {
                     ) : (
                       <>
                         <Sparkles size={11} />
-                        ✨ Generate AI Summary
+                         Generate AI Summary
                       </>
                     )}
                   </button>

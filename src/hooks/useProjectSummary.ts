@@ -20,7 +20,7 @@ export const useProjectSummary = () => {
             const prompt = `Reply with ONLY one sentence (max 25 words). Start with a strong verb. Be specific about the impact. Describe: "${projectTitle}" built with ${tech.slice(0, 3).join(", ")}.`;
 
             const response = await client.chat.completions.create({
-                model: "Qwen/Qwen3-Coder-Next:fastest",
+                model: "Qwen/Qwen3-32B",
                 messages: [{ role: "user", content: prompt }],
                 max_tokens: 500,
                 temperature: 0.5,

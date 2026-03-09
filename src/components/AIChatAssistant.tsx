@@ -71,7 +71,7 @@ const AIChatAssistant = () => {
 
         try {
             const response = await client.chat.completions.create({
-                model: "Qwen/Qwen3-Coder-Next:fastest",
+                model: "Qwen/Qwen3-32B",
                 messages: [
                     { role: "system", content: SYSTEM_PROMPT },
                     ...updatedMessages.map((m) => ({
@@ -168,7 +168,7 @@ const AIChatAssistant = () => {
                                     </p>
                                     <p className="text-emerald-400 text-xs flex items-center gap-1">
                                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
-                                        Online · Powered by Qwen3
+                                        Online
                                     </p>
                                 </div>
                             </div>

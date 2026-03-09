@@ -27,7 +27,7 @@ type FormData = z.infer<typeof schema>;
 const generateAIReply = async (name: string, message: string): Promise<string> => {
   try {
     const response = await client.chat.completions.create({
-      model: "Qwen/Qwen3-Coder-Next:fastest",
+      model: "Qwen/Qwen3-32B",
       messages: [
         {
           role: "system",

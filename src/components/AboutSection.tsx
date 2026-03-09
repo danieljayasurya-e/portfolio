@@ -74,12 +74,8 @@ const AboutSection = () => {
                 Open to Freelance
               </span>
               <span className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg bg-slate-800/60 border border-slate-700/50">
-                <GraduationCap size={14} className="text-cyan-400" />
-                B.E ECE — CGPA 8.50
-              </span>
-              <span className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg bg-slate-800/60 border border-slate-700/50">
                 <Code2 size={14} className="text-cyan-400" />
-                MERN · PostgreSQL · Docker
+                React.js · Node.js · PostgreSQL · Next.js
               </span>
             </div>
           </motion.div>
