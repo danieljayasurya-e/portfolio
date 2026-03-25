@@ -129,3 +129,29 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Hero gradient text animation */
+.hero-gradient-text {
+  background: linear-gradient(135deg, #22d3ee, #60a5fa, #a78bfa, #22d3ee);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Smooth section transitions */
+section {
+  position: relative;
+}
+
+/* Canvas optimization */
+canvas {
+  display: block;
+}

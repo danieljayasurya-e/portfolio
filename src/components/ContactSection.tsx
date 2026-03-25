@@ -1,13 +1,12 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
 import OpenAI from "openai";
 import toast, { Toaster } from "react-hot-toast";
-import { Mail, MapPin, Send, Phone, Loader2 } from "lucide-react";
-import CalendlyButton from "./CalendlyModal";
+import { Mail, MapPin, Send, Loader2 } from "lucide-react";
 
 const client = new OpenAI({
   baseURL: "https://router.huggingface.co/v1",
@@ -50,11 +49,13 @@ const generateAIReply = async (name: string, message: string): Promise<string> =
   }
 };
 
-
 const ContactSection = () => {
   const ref = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   const {
     register,
@@ -84,7 +85,7 @@ const ContactSection = () => {
       );
 
       if (result.status === 200) {
-        toast.success("Message sent! You'll receive a reply soon 🎉", { id: toastId });
+        toast.success("Message sent! You'll receive a reply soon.", { id: toastId });
         reset();
       } else {
         throw new Error("EmailJS returned non-200");
@@ -99,7 +100,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" ref={ref} className="py-24 bg-[#0d1424] relative overflow-hidden">
+    <section id="contact" ref={sectionRef} className="py-28 bg-[#0d1424] relative overflow-hidden">
       <Toaster
         position="top-right"
         toastOptions={{
@@ -111,9 +112,10 @@ const ContactSection = () => {
         }}
       />
 
-      <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl" />
+      <motion.div style={{ y: bgY }} className="absolute bottom-0 right-1/4 w-72 h-72 bg-cyan-500/5 rounded-full blur-[100px]" />
+      <motion.div style={{ y: bgY }} className="absolute top-1/3 left-0 w-48 h-48 bg-purple-500/5 rounded-full blur-[80px]" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -126,13 +128,13 @@ const ContactSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-10">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
           >
             <h3 className="text-4xl font-bold text-white mb-4">
               Get In{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <span className="hero-gradient-text">
                 Touch
               </span>
             </h3>
@@ -157,35 +159,30 @@ const ContactSection = () => {
                   href: "#",
                 },
               ].map(({ icon: Icon, label, href }) => (
-                <a
+                <motion.a
                   key={label}
                   href={href}
+                  whileHover={{ x: 4 }}
                   className="flex items-center gap-3 text-slate-400 hover:text-cyan-400 transition-colors group"
                 >
-                  <div className="p-2.5 rounded-lg bg-cyan-400/10 border border-cyan-400/20 group-hover:bg-cyan-400/20 transition-colors">
+                  <div className="p-2.5 rounded-lg bg-cyan-400/10 border border-cyan-400/20 group-hover:bg-cyan-400/20 group-hover:shadow-lg group-hover:shadow-cyan-400/10 transition-all duration-300">
                     <Icon size={16} className="text-cyan-400" />
                   </div>
                   {label}
-                </a>
+                </motion.a>
               ))}
             </div>
-
-            {/* Calendly here on left side too */}
-            {/* <div>
-              <p className="text-slate-500 text-sm mb-3">Or schedule a call directly:</p>
-              <CalendlyButton />
-            </div> */}
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
           >
             <form
               ref={formRef}
               onSubmit={handleSubmit(onSubmit)}
-              className="space-y-4 p-6 rounded-2xl bg-slate-800/30 border border-slate-700/40"
+              className="space-y-4 p-6 rounded-2xl bg-slate-800/20 border border-slate-700/40 backdrop-blur-sm"
             >
               {[
                 { name: "name", label: "Your Name", placeholder: "John Doe", type: "text" },
@@ -200,7 +197,7 @@ const ContactSection = () => {
                     {...register(field.name as keyof FormData)}
                     type={field.type}
                     placeholder={field.placeholder}
-                    className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-colors"
+                    className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:shadow-lg focus:shadow-cyan-500/5 transition-all duration-300"
                   />
                   {errors[field.name as keyof FormData] && (
                     <p className="text-red-400 text-xs mt-1">
@@ -216,33 +213,38 @@ const ContactSection = () => {
                   {...register("message")}
                   rows={4}
                   placeholder="Tell me about your project..."
-                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-colors resize-none"
+                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:shadow-lg focus:shadow-cyan-500/5 transition-all duration-300 resize-none"
                 />
                 {errors.message && (
                   <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>
                 )}
               </div>
 
-              <button
+              <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.02, boxShadow: "0 0 25px rgba(6,182,212,0.2)" }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-xl shadow-lg shadow-cyan-500/20 transition-all disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden group"
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" />
-                    Sending & Generating Reply...
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    Send Message
-                  </>
-                )}
-              </button>
+                <span className="relative z-10 flex items-center gap-2">
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      Sending & Generating Reply...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={16} />
+                      Send Message
+                    </>
+                  )}
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.button>
 
               <p className="text-xs text-slate-500 text-center">
-                ✨ You'll receive an AI-generated reply instantly
+                You'll receive an AI-generated reply instantly
               </p>
             </form>
           </motion.div>

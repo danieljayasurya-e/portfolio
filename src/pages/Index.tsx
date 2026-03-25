@@ -7,10 +7,12 @@ import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import AIChatAssistant from "@/components/AIChatAssistant";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const Index = () => {
   return (
     <div className="bg-background min-h-screen overflow-x-hidden">
+      <ScrollProgress />
       <Navbar />
       <HeroSection />
       <AboutSection />
@@ -19,7 +21,7 @@ const Index = () => {
       <ProjectsSection />
       <ContactSection />
       <Footer />
-      <AIChatAssistant /> 
+      <AIChatAssistant />
     </div>
   );
 };
