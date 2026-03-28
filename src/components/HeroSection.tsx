@@ -1,6 +1,6 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 
 const StaggerReveal = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   return (
@@ -57,16 +57,13 @@ const MagneticLink = ({ children, href, label }: { children: React.ReactNode; hr
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-editorial-dark py-24">
       {/* Grid background */}
       <div className="absolute inset-0 bg-grid-subtle opacity-5" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -153,7 +150,7 @@ const HeroSection = () => {
             </MagneticLink>
           ))}
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <motion.div

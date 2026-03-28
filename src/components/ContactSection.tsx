@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,9 +53,6 @@ const ContactSection = () => {
   const ref = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   const {
     register,
