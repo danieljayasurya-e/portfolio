@@ -1,7 +1,6 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
-import { Github, Folder, Star, Sparkles, Loader2 } from "lucide-react";
-import { useProjectSummary } from "../hooks/useProjectSummary";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Github } from "lucide-react";
 
 const projects = [
   {
@@ -66,155 +65,72 @@ const projects = [
   },
 ];
 
-const TiltCard = ({ children, className }: { children: React.ReactNode; className: string }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState("");
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
-    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`);
-  };
-
-  const handleMouseLeave = () => setTransform("");
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transform, transition: transform ? "transform 0.1s ease" : "transform 0.5s ease" }}
-      className={className}
-    >
-      {children}
-    </div>
-  );
-};
-
 const ProjectsSection = () => {
-  const { summaries, loading, generateSummary } = useProjectSummary();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-28 bg-[#0a0f1e] relative overflow-hidden">
-      <motion.div style={{ y: bgY }} className="absolute top-0 left-1/2 w-96 h-96 bg-cyan-500/5 rounded-full blur-[120px] -translate-x-1/2" />
-
-      <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" ref={ref} className="py-32 bg-editorial-dark relative overflow-hidden md:ml-64">
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex items-center gap-4 mb-16"
+          className="mb-16"
         >
-          <span className="text-cyan-400 font-mono text-sm">04.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">Featured Projects</h2>
-          <div className="flex-1 h-px bg-gradient-to-r from-cyan-500/30 to-transparent max-w-xs" />
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-accent font-display text-2xl">04</span>
+            <h2 className="text-5xl font-display font-bold text-editorial-text">Projects</h2>
+          </div>
+          <div className="w-20 h-1 bg-accent" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 auto-rows-fr">
-          {projects.map((project, i) => (
+        {/* Projects grid */}
+        <div className="space-y-8">
+          {projects.slice(0, 3).map((project, i) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 + i * 0.12, duration: 0.6 }}
-              className="h-full"
+              transition={{ delay: 0.1 + i * 0.15 }}
+              className="border-l-4 border-accent pl-6 py-6"
             >
-              <TiltCard
-                className={`relative p-6 rounded-2xl bg-gradient-to-br ${project.gradient} border ${project.border} flex flex-col h-full transition-all duration-500 ${project.hoverGlow} hover:shadow-2xl group`}
-              >
-                {project.featured && (
-                  <div className="absolute top-4 right-4 flex items-center gap-1 text-xs text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-1 rounded-full">
-                    <Star size={10} fill="currentColor" />
-                    Featured
-                  </div>
-                )}
-
-                <div className="flex items-start justify-between mb-4">
-                  <motion.div whileHover={{ rotate: 5 }} transition={{ type: "spring" }}>
-                    <Folder size={32} className="text-cyan-400 fill-cyan-400/20" />
-                  </motion.div>
-                </div>
-
-                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors duration-300">{project.title}</h3>
-
-                <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
-                  {project.description}
-                </p>
-
-                <div className="mb-4 min-h-[36px]">
-                  {summaries[project.title] ? (
-                    <motion.div
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-start gap-2 px-3 py-2 rounded-lg bg-cyan-400/5 border border-cyan-400/15 backdrop-blur-sm"
-                    >
-                      <Sparkles size={12} className="text-cyan-400 mt-0.5 shrink-0" />
-                      <p className="text-xs text-cyan-300 italic leading-relaxed">
-                        {summaries[project.title]}
-                      </p>
-                    </motion.div>
-                  ) : (
-                    <button
-                      onClick={() => generateSummary(project.title, project.tech)}
-                      disabled={loading[project.title]}
-                      className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-cyan-400 border border-slate-700/40 hover:border-cyan-400/30 px-3 py-1.5 rounded-lg bg-slate-800/30 hover:bg-cyan-400/5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {loading[project.title] ? (
-                        <>
-                          <Loader2 size={11} className="animate-spin text-cyan-400" />
-                          <span className="text-cyan-400">Generating...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles size={11} />
-                           Generate AI Summary
-                        </>
-                      )}
-                    </button>
-                  )}
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 text-xs font-mono text-cyan-400 bg-cyan-400/10 rounded-md border border-cyan-400/15 group-hover:bg-cyan-400/15 transition-colors"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </TiltCard>
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-3">
+                <h3 className="text-2xl font-display font-bold text-editorial-text">{project.title}</h3>
+                {project.featured && <span className="text-xs text-accent">Featured</span>}
+              </div>
+              <p className="text-editorial-text-muted mb-4 leading-relaxed">{project.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.tech.slice(0, 5).map((t) => (
+                  <span
+                    key={t}
+                    className="px-3 py-1 text-xs text-editorial-text border border-accent/30 hover:border-accent transition-colors"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
 
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.9 }}
-          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5 }}
+          className="mt-12 pt-12 border-t border-accent/20 text-center"
         >
           <motion.a
             href="https://github.com/danieljayasurya"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, y: -2 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-6 py-3 text-cyan-400 border border-cyan-400/40 rounded-xl hover:bg-cyan-400/10 transition-all duration-300 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 text-accent border border-accent/30 hover:border-accent hover:bg-accent/5 transition-all"
           >
-            <Github size={16} />
-            View More on GitHub
+            <Github size={18} />
+            View on GitHub
           </motion.a>
         </motion.div>
       </div>

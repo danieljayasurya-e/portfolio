@@ -1,6 +1,6 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { MapPin, Calendar, CheckCircle2 } from "lucide-react";
+import { MapPin, Calendar } from "lucide-react";
 
 const experiences = [
   {
@@ -65,89 +65,59 @@ const experiences = [
 const ExperienceSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   return (
-    <section id="experience" ref={sectionRef} className="py-28 bg-[#0d1424] relative overflow-hidden">
-      <motion.div style={{ y: bgY }} className="absolute top-1/3 right-0 w-64 h-64 bg-purple-500/5 rounded-full blur-[100px]" />
-      <motion.div style={{ y: bgY }} className="absolute bottom-1/4 left-0 w-48 h-48 bg-cyan-500/5 rounded-full blur-[80px]" />
-
-      <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" ref={ref} className="py-32 bg-editorial-dark relative overflow-hidden md:ml-64">
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex items-center gap-4 mb-16"
+          className="mb-16"
         >
-          <span className="text-cyan-400 font-mono text-sm">03.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">Experience</h2>
-          <div className="flex-1 h-px bg-gradient-to-r from-cyan-500/30 to-transparent max-w-xs" />
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-accent font-display text-2xl">03</span>
+            <h2 className="text-5xl font-display font-bold text-editorial-text">Experience</h2>
+          </div>
+          <div className="w-20 h-1 bg-accent" />
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/30 via-emerald-500/20 via-purple-500/20 to-transparent" />
+        <div className="space-y-8">
 
-          <div className="space-y-10">
-            {experiences.map((exp, i) => (
-              <motion.div
-                key={exp.company}
-                initial={{ opacity: 0, x: -40 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.2 + i * 0.2, duration: 0.6 }}
-                className="relative pl-16 md:pl-24"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : {}}
-                  transition={{ delay: 0.3 + i * 0.2, type: "spring", stiffness: 300 }}
-                  className={`absolute left-4 md:left-8 w-3 h-3 rounded-full ${exp.dotColor} -translate-x-1 mt-6 ring-4 ring-[#0d1424] z-10`}
-                />
-
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className={`p-6 rounded-2xl bg-gradient-to-br ${exp.color} border ${exp.borderColor} transition-all duration-500 hover:${exp.glowColor} hover:shadow-lg backdrop-blur-sm group`}
-                >
-                  <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">{exp.role}</h3>
-                      <p className="text-cyan-400 font-medium mt-0.5">{exp.company}</p>
-                    </div>
-                    <span className="text-xs px-3 py-1 rounded-full bg-slate-800/60 border border-slate-700/50 text-slate-300 backdrop-blur-sm">
-                      {exp.type}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-wrap gap-4 text-slate-400 text-sm mb-4">
-                    <span className="flex items-center gap-1.5">
-                      <Calendar size={13} className="text-cyan-400" />
-                      {exp.period}
-                      <span className="text-slate-600">· {exp.duration}</span>
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <MapPin size={13} className="text-cyan-400" />
-                      {exp.location}
-                    </span>
-                  </div>
-
-                  <ul className="space-y-2">
-                    {exp.points.map((point, j) => (
-                      <motion.li
-                        key={j}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ delay: 0.4 + i * 0.2 + j * 0.05 }}
-                        className="flex items-start gap-2 text-slate-400 text-sm"
-                      >
-                        <CheckCircle2 size={14} className="text-cyan-400 mt-0.5 shrink-0" />
-                        {point}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
+          {experiences.map((exp, i) => (
+            <motion.div
+              key={exp.company}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.2 + i * 0.1 }}
+            >
+              <div className="border-l-4 border-accent pl-6 py-4">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-2">
+                  <h3 className="text-2xl font-display font-bold text-editorial-text">{exp.role}</h3>
+                  <span className="text-sm text-accent">{exp.duration}</span>
+                </div>
+                <p className="text-editorial-text-muted mb-1">{exp.company}</p>
+                <div className="flex gap-4 text-sm text-editorial-text-muted mb-4">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={14} />
+                    {exp.period}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <MapPin size={14} />
+                    {exp.location}
+                  </span>
+                </div>
+                <ul className="space-y-2 text-editorial-text-muted text-sm">
+                  {exp.points.slice(0, 3).map((point) => (
+                    <li key={point} className="flex gap-2">
+                      <span className="text-accent mt-0.5">•</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

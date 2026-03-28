@@ -3,43 +3,45 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="py-16 text-center border-t border-slate-800/50 bg-[#0a0f1e] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/[0.02] to-transparent" />
-      
-      <div className="relative z-10">
-        <div className="flex items-center justify-center gap-6 mb-8">
-          {[
-            { icon: Github, href: "https://github.com/danieljayasurya", label: "GitHub" },
-            { icon: Linkedin, href: "https://www.linkedin.com/in/daniel-jayasurya-e-a0a25b1ba", label: "LinkedIn" },
-            { icon: Mail, href: "mailto:danieljayasurya@gmail.com", label: "Email" },
-          ].map(({ icon: Icon, href, label }) => (
-            <motion.a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-slate-500 hover:text-cyan-400 transition-colors duration-300"
-            >
-              <Icon size={18} />
-            </motion.a>
-          ))}
-        </div>
+    <footer className="py-12 border-t border-accent/20 bg-editorial-dark relative md:ml-64">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="flex flex-col items-center justify-center gap-8">
+          {/* Social links */}
+          <div className="flex items-center justify-center gap-6">
+            {[
+              { icon: Github, href: "https://github.com/danieljayasurya", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/daniel-jayasurya-e-a0a25b1ba", label: "LinkedIn" },
+              { icon: Mail, href: "mailto:danieljayasuryae@gmail.com", label: "Email" },
+            ].map(({ icon: Icon, href, label }) => (
+              <motion.a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.15, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-editorial-text-muted hover:text-accent transition-colors"
+              >
+                <Icon size={20} />
+              </motion.a>
+            ))}
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="space-y-2"
-        >
-          <p className="text-slate-600 text-xs font-mono tracking-wider">
-            Designed & Built by Daniel Jayasurya
-          </p>
-          <p className="text-slate-700 text-xs font-mono">
-            &copy; {new Date().getFullYear()} All Rights Reserved
-          </p>
-        </motion.div>
+          {/* Copyright */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center space-y-1"
+          >
+            <p className="text-editorial-text-muted text-xs tracking-wide">
+              Designed & built by Daniel Jayasurya
+            </p>
+            <p className="text-editorial-text-muted/50 text-xs">
+              &copy; {new Date().getFullYear()} All rights reserved.
+            </p>
+          </motion.div>
+        </div>
       </div>
     </footer>
   );

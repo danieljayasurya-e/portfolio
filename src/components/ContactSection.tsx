@@ -100,53 +100,46 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-28 bg-[#0d1424] relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-32 bg-editorial-dark relative overflow-hidden md:ml-64">
       <Toaster
         position="top-right"
         toastOptions={{
           style: {
-            background: "#1e293b",
-            color: "#fff",
-            border: "1px solid rgba(6,182,212,0.2)",
+            background: "var(--editor-card)",
+            color: "var(--editor-text)",
+            border: "1px solid var(--editor-accent)",
           },
         }}
       />
 
-      <motion.div style={{ y: bgY }} className="absolute bottom-0 right-1/4 w-72 h-72 bg-cyan-500/5 rounded-full blur-[100px]" />
-      <motion.div style={{ y: bgY }} className="absolute top-1/3 left-0 w-48 h-48 bg-purple-500/5 rounded-full blur-[80px]" />
-
-      <div ref={ref} className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-6">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex items-center gap-4 mb-16"
+          className="mb-16"
         >
-          <span className="text-cyan-400 font-mono text-sm">05.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">What's Next?</h2>
-          <div className="flex-1 h-px bg-gradient-to-r from-cyan-500/30 to-transparent max-w-xs" />
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-accent font-display text-2xl">05</span>
+            <h2 className="text-5xl font-display font-bold text-editorial-text">Contact</h2>
+          </div>
+          <div className="w-20 h-1 bg-accent" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10">
+        <div className="grid lg:grid-cols-2 gap-12">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.2 }}
           >
-            <h3 className="text-4xl font-bold text-white mb-4">
-              Get In{" "}
-              <span className="hero-gradient-text">
-                Touch
-              </span>
+            <h3 className="text-3xl font-display font-bold text-editorial-text mb-4">
+              Let&apos;s build something.
             </h3>
-            <p className="text-slate-400 mb-8 leading-relaxed">
-              I'm open to{" "}
-              <span className="text-cyan-400">freelance and contract</span>{" "}
-              opportunities. Fill the form — you'll get an{" "}
-              <span className="text-cyan-400">AI-generated instant reply</span> from
-              me!
+            <p className="text-editorial-text-muted mb-8 leading-relaxed">
+              Open to freelance, contract, and full-time opportunities. Interested in your project? Send me a message.
             </p>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4">
               {[
                 {
                   icon: Mail,
@@ -155,7 +148,7 @@ const ContactSection = () => {
                 },
                 {
                   icon: MapPin,
-                  label: "Coimbatore, Tamil Nadu, India",
+                  label: "Coimbatore, India",
                   href: "#",
                 },
               ].map(({ icon: Icon, label, href }) => (
@@ -163,11 +156,9 @@ const ContactSection = () => {
                   key={label}
                   href={href}
                   whileHover={{ x: 4 }}
-                  className="flex items-center gap-3 text-slate-400 hover:text-cyan-400 transition-colors group"
+                  className="flex items-center gap-3 text-editorial-text-muted hover:text-accent transition-colors"
                 >
-                  <div className="p-2.5 rounded-lg bg-cyan-400/10 border border-cyan-400/20 group-hover:bg-cyan-400/20 group-hover:shadow-lg group-hover:shadow-cyan-400/10 transition-all duration-300">
-                    <Icon size={16} className="text-cyan-400" />
-                  </div>
+                  <Icon size={18} className="text-accent" />
                   {label}
                 </motion.a>
               ))}
@@ -177,30 +168,30 @@ const ContactSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: 0.3 }}
           >
             <form
               ref={formRef}
               onSubmit={handleSubmit(onSubmit)}
-              className="space-y-4 p-6 rounded-2xl bg-slate-800/20 border border-slate-700/40 backdrop-blur-sm"
+              className="space-y-4 p-6 border border-accent/20 bg-accent/5"
             >
               {[
-                { name: "name", label: "Your Name", placeholder: "John Doe", type: "text" },
-                { name: "email", label: "Your Email", placeholder: "john@example.com", type: "email" },
-                { name: "subject", label: "Subject", placeholder: "Project Inquiry", type: "text" },
+                { name: "name", label: "Name", placeholder: "Your name", type: "text" },
+                { name: "email", label: "Email", placeholder: "your@email.com", type: "email" },
+                { name: "subject", label: "Subject", placeholder: "Project inquiry", type: "text" },
               ].map((field) => (
                 <div key={field.name}>
-                  <label className="text-sm text-slate-400 mb-1.5 block">
+                  <label className="text-sm text-editorial-text-muted mb-2 block">
                     {field.label}
                   </label>
                   <input
                     {...register(field.name as keyof FormData)}
                     type={field.type}
                     placeholder={field.placeholder}
-                    className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:shadow-lg focus:shadow-cyan-500/5 transition-all duration-300"
+                    className="w-full bg-editorial-card border border-accent/20 px-4 py-2 text-sm text-editorial-text placeholder-editorial-text-muted/50 focus:outline-none focus:border-accent transition-all"
                   />
                   {errors[field.name as keyof FormData] && (
-                    <p className="text-red-400 text-xs mt-1">
+                    <p className="text-secondary-accent text-xs mt-1">
                       {errors[field.name as keyof FormData]?.message}
                     </p>
                   )}
@@ -208,44 +199,39 @@ const ContactSection = () => {
               ))}
 
               <div>
-                <label className="text-sm text-slate-400 mb-1.5 block">Message</label>
+                <label className="text-sm text-editorial-text-muted mb-2 block">Message</label>
                 <textarea
                   {...register("message")}
                   rows={4}
                   placeholder="Tell me about your project..."
-                  className="w-full bg-slate-900/60 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:shadow-lg focus:shadow-cyan-500/5 transition-all duration-300 resize-none"
+                  className="w-full bg-editorial-card border border-accent/20 px-4 py-2 text-sm text-editorial-text placeholder-editorial-text-muted/50 focus:outline-none focus:border-accent transition-all resize-none"
                 />
                 {errors.message && (
-                  <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>
+                  <p className="text-secondary-accent text-xs mt-1">{errors.message.message}</p>
                 )}
               </div>
 
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: 1.02, boxShadow: "0 0 25px rgba(6,182,212,0.2)" }}
+                whileHover={{ scale: 1.02, backgroundColor: "var(--editor-accent)", color: "var(--editor-bg)" }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-xl shadow-lg shadow-cyan-500/20 transition-all disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden group"
+                className="w-full flex items-center justify-center gap-2 py-3 bg-accent text-editorial-dark font-display font-bold transition-all disabled:opacity-60 disabled:cursor-not-allowed border border-accent"
               >
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="flex items-center gap-2">
                   {isSubmitting ? (
                     <>
                       <Loader2 size={16} className="animate-spin" />
-                      Sending & Generating Reply...
+                      Sending...
                     </>
                   ) : (
                     <>
                       <Send size={16} />
-                      Send Message
+                      Send
                     </>
                   )}
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.button>
-
-              <p className="text-xs text-slate-500 text-center">
-                You'll receive an AI-generated reply instantly
-              </p>
             </form>
           </motion.div>
         </div>

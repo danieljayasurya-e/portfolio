@@ -11,7 +11,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 
 const Index = () => {
   return (
-    <div className="bg-background min-h-screen overflow-x-hidden">
+    <div className="bg-editorial-dark min-h-screen overflow-x-hidden">
       <ScrollProgress />
       <Navbar />
       <HeroSection />
