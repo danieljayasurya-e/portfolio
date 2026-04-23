@@ -269,7 +269,7 @@ const HeroSection = () => {
                 <div className="mt-5 grid grid-cols-3 gap-3">
                   {[
                     { label: "Load time", value: "-35%" },
-                    { label: "DB queries", value: "-40%" },
+                    { label: "React performance", value: "+40%" },
                     { label: "Users", value: "5K+" },
                   ].map((s) => (
                     <div
