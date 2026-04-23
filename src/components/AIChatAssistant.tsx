@@ -113,9 +113,9 @@ const AIChatAssistant = () => {
         <>
             <motion.button
                 onClick={() => setOpen(!open)}
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
-                className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/30 flex items-center justify-center"
+                className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl bg-brand-gradient text-white shadow-glow flex items-center justify-center"
                 aria-label="Open AI Chat"
             >
                 <AnimatePresence mode="wait">
@@ -145,82 +145,85 @@ const AIChatAssistant = () => {
 
             {/* Unread dot when closed */}
             {!open && (
-                <span className="fixed bottom-[72px] right-6 z-50 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-[#0a0f1e]" />
+                <span className="fixed bottom-[72px] right-[26px] z-50 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-white" />
             )}
 
             <AnimatePresence>
                 {open && (
                     <motion.div
-                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 16, scale: 0.96 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        transition={{ duration: 0.25 }}
-                        className="fixed bottom-24 right-6 z-50 w-[350px] sm:w-[400px] h-[500px] flex flex-col rounded-2xl bg-[#0d1424] border border-cyan-500/20 shadow-2xl shadow-black/50 overflow-hidden"
+                        exit={{ opacity: 0, y: 16, scale: 0.96 }}
+                        transition={{ duration: 0.22 }}
+                        className="fixed bottom-24 right-6 z-50 w-[350px] sm:w-[400px] h-[520px] flex flex-col rounded-3xl bg-white border border-brand-100 shadow-float overflow-hidden"
                     >
-                        <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-cyan-500/20 to-blue-600/10 border-b border-cyan-500/10">
+                        <div className="flex items-center justify-between px-4 py-3 bg-brand-gradient text-white">
                             <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
+                                <div className="w-9 h-9 rounded-xl bg-white/20 ring-1 ring-white/30 flex items-center justify-center">
                                     <Bot size={16} className="text-white" />
                                 </div>
                                 <div>
                                     <p className="text-white text-sm font-semibold">
                                         Daniel's AI Assistant
                                     </p>
-                                    <p className="text-emerald-400 text-xs flex items-center gap-1">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
+                                    <p className="text-white/85 text-xs flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 inline-block animate-pulse" />
                                         Online
                                     </p>
                                 </div>
                             </div>
                             <button
                                 onClick={() => setOpen(false)}
-                                className="text-slate-500 hover:text-slate-300 transition-colors p-1"
+                                className="text-white/80 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-white/10"
                             >
                                 <X size={16} />
                             </button>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-surface-soft">
                             {messages.map((msg, i) => (
                                 <motion.div
                                     key={i}
-                                    initial={{ opacity: 0, y: 8 }}
+                                    initial={{ opacity: 0, y: 6 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.2 }}
-                                    className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"
-                                        }`}
+                                    className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
                                 >
                                     <div
-                                        className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${msg.role === "assistant"
-                                                ? "bg-gradient-to-br from-cyan-400 to-blue-600"
-                                                : "bg-slate-700"
-                                            }`}
+                                        className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
+                                            msg.role === "assistant"
+                                                ? "bg-brand-gradient text-white"
+                                                : "bg-ink text-white"
+                                        }`}
                                     >
                                         {msg.role === "assistant" ? (
-                                            <Bot size={13} className="text-white" />
+                                            <Bot size={13} />
                                         ) : (
-                                            <User size={13} className="text-white" />
+                                            <User size={13} />
                                         )}
                                     </div>
-                                    <div className={`max-w-[78%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${msg.role === "assistant"
-                                            ? "bg-slate-800/80 text-slate-200 rounded-tl-none"
-                                            : "bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-tr-none"
-                                        }`}>
+                                    <div
+                                        className={`max-w-[78%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
+                                            msg.role === "assistant"
+                                                ? "bg-white text-ink border border-brand-100 rounded-tl-md"
+                                                : "bg-brand-gradient text-white rounded-tr-md shadow-glow"
+                                        }`}
+                                    >
                                         {msg.role === "assistant" ? (
                                             <ReactMarkdown
                                                 components={{
                                                     p: ({ children }) => <p className="mb-1 last:mb-0">{children}</p>,
                                                     strong: ({ children }) => (
-                                                        <strong className="text-cyan-300 font-semibold">{children}</strong>
+                                                        <strong className="text-brand-700 font-semibold">{children}</strong>
                                                     ),
                                                     ul: ({ children }) => (
                                                         <ul className="list-disc list-inside space-y-0.5 mt-1">{children}</ul>
                                                     ),
                                                     li: ({ children }) => (
-                                                        <li className="text-slate-300">{children}</li>
+                                                        <li className="text-ink-muted">{children}</li>
                                                     ),
                                                     code: ({ children }) => (
-                                                        <code className="px-1 py-0.5 rounded bg-slate-700/60 text-cyan-300 text-xs font-mono">
+                                                        <code className="px-1 py-0.5 rounded bg-brand-50 text-brand-700 text-xs font-mono">
                                                             {children}
                                                         </code>
                                                     ),
@@ -232,7 +235,6 @@ const AIChatAssistant = () => {
                                             msg.content
                                         )}
                                     </div>
-
                                 </motion.div>
                             ))}
 
@@ -242,13 +244,13 @@ const AIChatAssistant = () => {
                                     animate={{ opacity: 1 }}
                                     className="flex gap-2 items-center"
                                 >
-                                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shrink-0">
+                                    <div className="w-7 h-7 rounded-full bg-brand-gradient flex items-center justify-center shrink-0">
                                         <Bot size={13} className="text-white" />
                                     </div>
-                                    <div className="px-3 py-2 bg-slate-800/80 rounded-2xl rounded-tl-none flex items-center gap-1.5">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:0ms]" />
-                                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:150ms]" />
-                                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:300ms]" />
+                                    <div className="px-3 py-2 bg-white border border-brand-100 rounded-2xl rounded-tl-md flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-bounce [animation-delay:0ms]" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-bounce [animation-delay:150ms]" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-bounce [animation-delay:300ms]" />
                                     </div>
                                 </motion.div>
                             )}
@@ -256,12 +258,12 @@ const AIChatAssistant = () => {
                         </div>
 
                         {messages.length === 1 && !loading && (
-                            <div className="px-4 pb-2 flex flex-wrap gap-2">
+                            <div className="px-4 pb-2 pt-2 flex flex-wrap gap-2 bg-surface-soft">
                                 {SUGGESTIONS.map((s) => (
                                     <button
                                         key={s}
                                         onClick={() => sendMessage(s)}
-                                        className="text-xs px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 hover:bg-cyan-500/20 transition-colors"
+                                        className="text-xs px-3 py-1.5 rounded-full bg-white border border-brand-200 text-brand-700 hover:bg-brand-50 transition-colors"
                                     >
                                         {s}
                                     </button>
@@ -269,19 +271,19 @@ const AIChatAssistant = () => {
                             </div>
                         )}
 
-                        <div className="px-4 py-3 border-t border-slate-800/50 flex gap-2">
+                        <div className="px-4 py-3 border-t border-brand-100 bg-white flex gap-2">
                             <input
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
                                 placeholder="Ask me anything about Daniel..."
                                 disabled={loading}
-                                className="flex-1 bg-slate-800/60 border border-slate-700/50 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-colors disabled:opacity-50"
+                                className="flex-1 bg-surface-soft border border-brand-100 rounded-xl px-3.5 py-2.5 text-sm text-ink placeholder-ink-soft/80 focus:outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100 transition-all disabled:opacity-50"
                             />
                             <button
                                 onClick={() => sendMessage()}
                                 disabled={!input.trim() || loading}
-                                className="p-2.5 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:-translate-y-0.5 transition-all"
+                                className="p-2.5 rounded-xl bg-brand-gradient text-white shadow-glow disabled:opacity-40 disabled:cursor-not-allowed hover:-translate-y-0.5 transition-all"
                             >
                                 {loading ? (
                                     <Loader2 size={16} className="animate-spin" />

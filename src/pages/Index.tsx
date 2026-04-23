@@ -11,15 +11,17 @@ import ScrollProgress from "@/components/ScrollProgress";
 
 const Index = () => {
   return (
-    <div className="bg-background min-h-screen overflow-x-hidden">
+    <div className="relative bg-background text-ink min-h-screen overflow-x-hidden">
       <ScrollProgress />
       <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ExperienceSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
       <Footer />
       <AIChatAssistant />
     </div>

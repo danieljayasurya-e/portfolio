@@ -14,14 +14,12 @@ const CalendlyButton = ({ variant = "default" }: Props) => {
     <>
       <motion.button
         onClick={() => setIsOpen(true)}
-        whileHover={{ scale: 1.03 }}
+        whileHover={{ y: -2 }}
         whileTap={{ scale: 0.97 }}
         className={
           variant === "outline"
-            ?
-              "flex items-center gap-2 px-4 py-2 text-sm text-cyan-400 border border-cyan-400/50 rounded-lg hover:bg-cyan-400/10 transition-all"
-            :
-              "inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
+            ? "inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand-600 bg-white border border-brand-200 rounded-xl hover:bg-brand-50 hover:border-brand-300 transition-all"
+            : "btn-primary !px-5 !py-2.5 text-sm"
         }
       >
         <Calendar size={14} />

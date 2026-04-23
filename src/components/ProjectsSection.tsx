@@ -1,6 +1,6 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Github, Folder, Star, Sparkles, Loader2 } from "lucide-react";
+import { Github, ArrowUpRight, Star, Sparkles, Loader2, Folder } from "lucide-react";
 import { useProjectSummary } from "../hooks/useProjectSummary";
 
 const projects = [
@@ -12,9 +12,6 @@ const projects = [
     github: "https://github.com/danieljayasurya",
     live: "#",
     featured: true,
-    gradient: "from-cyan-500/20 to-blue-500/10",
-    border: "border-cyan-500/20",
-    hoverGlow: "hover:shadow-cyan-500/10",
   },
   {
     title: "MHCET Test Engine – Online Assessment Platform",
@@ -24,9 +21,6 @@ const projects = [
     github: "https://github.com/danieljayasurya",
     live: "#",
     featured: true,
-    gradient: "from-emerald-500/20 to-teal-500/10",
-    border: "border-emerald-500/20",
-    hoverGlow: "hover:shadow-emerald-500/10",
   },
   {
     title: "DWG Editor – ODA Drawing SDK",
@@ -36,9 +30,6 @@ const projects = [
     github: "https://github.com/danieljayasurya",
     live: "#",
     featured: true,
-    gradient: "from-purple-500/20 to-violet-500/10",
-    border: "border-purple-500/20",
-    hoverGlow: "hover:shadow-purple-500/10",
   },
   {
     title: "PRA CRM – Customer Relationship Management",
@@ -48,9 +39,6 @@ const projects = [
     github: "https://github.com/danieljayasurya",
     live: "#",
     featured: false,
-    gradient: "from-orange-500/20 to-amber-500/10",
-    border: "border-orange-500/20",
-    hoverGlow: "hover:shadow-orange-500/10",
   },
   {
     title: "CONNECT ATS – Applicant Tracking System",
@@ -60,9 +48,6 @@ const projects = [
     github: "https://github.com/danieljayasurya",
     live: "#",
     featured: false,
-    gradient: "from-rose-500/20 to-pink-500/10",
-    border: "border-rose-500/20",
-    hoverGlow: "hover:shadow-rose-500/10",
   },
 ];
 
@@ -77,9 +62,9 @@ const TiltCard = ({ children, className }: { children: React.ReactNode; classNam
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
-    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`);
+    const rotateX = (y - centerY) / 40;
+    const rotateY = (centerX - x) / 40;
+    setTransform(`perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`);
   };
 
   const handleMouseLeave = () => setTransform("");
@@ -101,65 +86,94 @@ const ProjectsSection = () => {
   const { summaries, loading, generateSummary } = useProjectSummary();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-28 bg-[#0a0f1e] relative overflow-hidden">
-      <motion.div style={{ y: bgY }} className="absolute top-0 left-1/2 w-96 h-96 bg-cyan-500/5 rounded-full blur-[120px] -translate-x-1/2" />
+    <section id="projects" className="py-28 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-surface-soft to-white pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-brand-200/25 rounded-full blur-[140px] pointer-events-none" />
 
-      <div ref={ref} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={ref} className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex items-center gap-4 mb-16"
+          className="flex flex-col items-start gap-3 mb-14"
         >
-          <span className="text-cyan-400 font-mono text-sm">04.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">Featured Projects</h2>
-          <div className="flex-1 h-px bg-gradient-to-r from-cyan-500/30 to-transparent max-w-xs" />
+          <span className="section-eyebrow">04 — Projects</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight font-heading">
+            Selected work & <span className="hero-gradient-text">case studies</span>
+          </h2>
+          <p className="text-ink-muted text-base max-w-2xl">
+            A glimpse into production systems I've built, shipped, and scaled — from admissions platforms to CAD editors.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 auto-rows-fr">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 + i * 0.12, duration: 0.6 }}
+              transition={{ delay: 0.1 + i * 0.1, duration: 0.6 }}
               className="h-full"
             >
-              <TiltCard
-                className={`relative p-6 rounded-2xl bg-gradient-to-br ${project.gradient} border ${project.border} flex flex-col h-full transition-all duration-500 ${project.hoverGlow} hover:shadow-2xl group`}
-              >
+              <TiltCard className="card-surface relative p-7 flex flex-col h-full group overflow-hidden">
+                {/* subtle hover wash */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand-50 to-transparent pointer-events-none" />
+
                 {project.featured && (
-                  <div className="absolute top-4 right-4 flex items-center gap-1 text-xs text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-1 rounded-full">
+                  <div className="absolute top-5 right-5 inline-flex items-center gap-1 text-[11px] font-medium text-brand-700 bg-brand-50 border border-brand-200 px-2.5 py-1 rounded-full">
                     <Star size={10} fill="currentColor" />
                     Featured
                   </div>
                 )}
 
-                <div className="flex items-start justify-between mb-4">
-                  <motion.div whileHover={{ rotate: 5 }} transition={{ type: "spring" }}>
-                    <Folder size={32} className="text-cyan-400 fill-cyan-400/20" />
-                  </motion.div>
+                <div className="relative flex items-center gap-3 mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-brand-gradient text-white grid place-items-center shadow-glow">
+                    <Folder size={18} />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <motion.a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ y: -2 }}
+                      className="p-2 rounded-xl bg-white border border-brand-100 text-ink-muted hover:text-brand-600 hover:border-brand-300 transition-all"
+                      aria-label="View source on GitHub"
+                    >
+                      <Github size={14} />
+                    </motion.a>
+                    {project.live && project.live !== "#" && (
+                      <motion.a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ y: -2 }}
+                        className="p-2 rounded-xl bg-white border border-brand-100 text-ink-muted hover:text-brand-600 hover:border-brand-300 transition-all"
+                        aria-label="View live project"
+                      >
+                        <ArrowUpRight size={14} />
+                      </motion.a>
+                    )}
+                  </div>
                 </div>
 
-                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors duration-300">{project.title}</h3>
+                <h3 className="relative text-lg font-bold text-ink mb-3 font-heading leading-snug group-hover:text-brand-700 transition-colors">
+                  {project.title}
+                </h3>
 
-                <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+                <p className="relative text-ink-muted text-sm leading-relaxed flex-1 mb-5">
                   {project.description}
                 </p>
 
-                <div className="mb-4 min-h-[36px]">
+                <div className="relative mb-5 min-h-[40px]">
                   {summaries[project.title] ? (
                     <motion.div
                       initial={{ opacity: 0, y: 4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="flex items-start gap-2 px-3 py-2 rounded-lg bg-cyan-400/5 border border-cyan-400/15 backdrop-blur-sm"
+                      className="flex items-start gap-2 px-3 py-2 rounded-xl bg-brand-50 border border-brand-100"
                     >
-                      <Sparkles size={12} className="text-cyan-400 mt-0.5 shrink-0" />
-                      <p className="text-xs text-cyan-300 italic leading-relaxed">
+                      <Sparkles size={12} className="text-brand-600 mt-0.5 shrink-0" />
+                      <p className="text-xs text-brand-700 italic leading-relaxed">
                         {summaries[project.title]}
                       </p>
                     </motion.div>
@@ -167,28 +181,28 @@ const ProjectsSection = () => {
                     <button
                       onClick={() => generateSummary(project.title, project.tech)}
                       disabled={loading[project.title]}
-                      className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-cyan-400 border border-slate-700/40 hover:border-cyan-400/30 px-3 py-1.5 rounded-lg bg-slate-800/30 hover:bg-cyan-400/5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="inline-flex items-center gap-1.5 text-xs text-ink-soft hover:text-brand-600 border border-brand-100 hover:border-brand-300 px-3 py-1.5 rounded-full bg-white hover:bg-brand-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {loading[project.title] ? (
                         <>
-                          <Loader2 size={11} className="animate-spin text-cyan-400" />
-                          <span className="text-cyan-400">Generating...</span>
+                          <Loader2 size={11} className="animate-spin text-brand-600" />
+                          <span className="text-brand-600">Generating...</span>
                         </>
                       ) : (
                         <>
                           <Sparkles size={11} />
-                           Generate AI Summary
+                          Generate AI Summary
                         </>
                       )}
                     </button>
                   )}
                 </div>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="relative flex flex-wrap gap-1.5">
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 text-xs font-mono text-cyan-400 bg-cyan-400/10 rounded-md border border-cyan-400/15 group-hover:bg-cyan-400/15 transition-colors"
+                      className="px-2.5 py-1 text-[11px] font-mono font-medium text-brand-700 bg-brand-50 rounded-md border border-brand-100"
                     >
                       {t}
                     </span>
@@ -202,16 +216,16 @@ const ProjectsSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.9 }}
+          transition={{ delay: 0.8 }}
           className="text-center mt-12"
         >
           <motion.a
             href="https://github.com/danieljayasurya"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, y: -2 }}
+            whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-6 py-3 text-cyan-400 border border-cyan-400/40 rounded-xl hover:bg-cyan-400/10 transition-all duration-300 backdrop-blur-sm"
+            className="btn-secondary"
           >
             <Github size={16} />
             View More on GitHub

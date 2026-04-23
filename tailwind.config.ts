@@ -62,22 +62,42 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        neon: {
-          cyan: "#00f0ff",
-          violet: "#a855f7",
-          blue: "#3b82f6",
-          pink: "#ec4899",
+        /* Brand purple scale */
+        brand: {
+          50:  "#F5F3FF",
+          100: "#EDE9FE",
+          200: "#DDD6FE",
+          300: "#C4B5FD",
+          400: "#A29BFE",
+          500: "#6C5CE7",
+          600: "#5B4CD4",
+          700: "#4B3EB5",
+          800: "#3B3090",
+          900: "#2A236B",
         },
-        void: {
-          DEFAULT: "#050510",
-          light: "#08081a",
-          mid: "#0a0a20",
+        ink: {
+          DEFAULT: "#0F0F1E",
+          muted: "#4A4A5E",
+          soft:  "#6B6B80",
+        },
+        surface: {
+          DEFAULT: "#FFFFFF",
+          soft:    "#FAFAFE",
+          tint:    "#F5F3FF",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        "2xl": "1.25rem",
+        "3xl": "1.5rem",
+      },
+      boxShadow: {
+        "soft":  "0 2px 6px rgba(15, 15, 30, 0.05)",
+        "card":  "0 8px 24px rgba(15, 15, 30, 0.06)",
+        "float": "0 16px 40px rgba(15, 15, 30, 0.08)",
+        "glow":  "0 10px 40px -10px rgba(108, 92, 231, 0.35)",
       },
       keyframes: {
         "accordion-down": {
@@ -90,28 +110,20 @@ export default {
         },
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
+          "50%": { transform: "translateY(-16px)" },
         },
         "float-slow": {
           "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "33%": { transform: "translateY(-12px) rotate(1deg)" },
-          "66%": { transform: "translateY(6px) rotate(-1deg)" },
+          "33%": { transform: "translateY(-10px) rotate(0.5deg)" },
+          "66%": { transform: "translateY(6px) rotate(-0.5deg)" },
         },
-        "pulse-glow": {
-          "0%, 100%": { opacity: "0.15" },
-          "50%": { opacity: "0.35" },
+        "pulse-soft": {
+          "0%, 100%": { opacity: "0.35" },
+          "50%": { opacity: "0.6" },
         },
         "shimmer": {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
-        },
-        "aurora": {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
-        },
-        "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 5px rgba(0,240,255,0.2), 0 0 20px rgba(0,240,255,0.1)" },
-          "50%": { boxShadow: "0 0 20px rgba(0,240,255,0.4), 0 0 40px rgba(0,240,255,0.2)" },
         },
         "border-flow": {
           "0%": { backgroundPosition: "0% 50%" },
@@ -124,15 +136,14 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "float 6s ease-in-out infinite",
         "float-slow": "float-slow 8s ease-in-out infinite",
-        "pulse-glow": "pulse-glow 4s ease-in-out infinite",
+        "pulse-soft": "pulse-soft 4s ease-in-out infinite",
         "shimmer": "shimmer 3s linear infinite",
-        "aurora": "aurora 20s linear infinite",
-        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
         "border-flow": "border-flow 4s ease infinite",
       },
       backgroundImage: {
-        "grid-pattern": "linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px)",
-        "aurora-gradient": "conic-gradient(from 0deg, transparent, rgba(0,240,255,0.05), transparent, rgba(168,85,247,0.05), transparent)",
+        "brand-gradient": "linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%)",
+        "soft-gradient":  "linear-gradient(180deg, #FFFFFF 0%, #F8F7FF 100%)",
+        "grid-pattern":   "linear-gradient(rgba(108,92,231,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(108,92,231,0.06) 1px, transparent 1px)",
       },
     },
   },
