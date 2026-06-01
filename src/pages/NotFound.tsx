@@ -10,24 +10,18 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background">
-      <div className="absolute top-1/4 left-1/4 w-[480px] h-[480px] bg-brand-200/40 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[380px] h-[380px] bg-brand-300/30 rounded-full blur-[100px] pointer-events-none" />
-
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background bg-line-grid bg-[size:80px_80px]">
       <div className="relative text-center px-6">
-        <p className="text-[10rem] sm:text-[14rem] font-extrabold leading-none font-heading hero-gradient-text">
+        <p className="text-[8rem] sm:text-[14rem] font-extrabold leading-none font-heading uppercase text-ink inline-block bg-lime border-[3px] border-ink shadow-brutal-xl px-6 -rotate-2">
           404
         </p>
-        <h1 className="mt-4 text-2xl sm:text-3xl font-bold text-ink font-heading">
+        <h1 className="mt-8 text-2xl sm:text-3xl font-extrabold uppercase text-ink font-heading tracking-tight">
           Page not found
         </h1>
-        <p className="mt-3 text-ink-muted max-w-md mx-auto">
+        <p className="mt-3 text-ink-muted font-mono text-sm max-w-md mx-auto">
           The page you were looking for doesn't exist or has been moved.
         </p>
-        <a
-          href="/"
-          className="btn-primary mt-8 inline-flex"
-        >
+        <a href="/" className="btn-primary mt-8 inline-flex">
           <ArrowLeft size={16} />
           Return to Home
         </a>

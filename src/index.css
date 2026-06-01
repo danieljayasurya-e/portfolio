@@ -1,73 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* =========================================================
-   Purple + White — Premium SaaS theme
-   Inspired by Stripe, Vercel, Linear
+   NEO-BRUTALIST / MAXIMALIST SYSTEM
+   Cream paper · ink black · hard offset shadows · clash color
    ========================================================= */
 
 @layer base {
   :root {
     /* Core surface & text */
-    --background: 250 60% 99%;
-    --foreground: 240 18% 12%;
+    --background: 44 38% 90%;          /* #F1EBDA cream paper */
+    --foreground: 0 0% 4%;             /* #0A0A0A ink */
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 18% 12%;
+    --card: 48 56% 96%;                /* #FBF9F0 */
+    --card-foreground: 0 0% 4%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 18% 12%;
+    --popover: 48 56% 96%;
+    --popover-foreground: 0 0% 4%;
 
-    /* Primary purple */
-    --primary: 252 75% 64%;          /* #6C5CE7 */
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 4%;                /* ink — brutalist black */
+    --primary-foreground: 48 56% 96%;
 
-    --secondary: 250 50% 97%;
-    --secondary-foreground: 240 18% 18%;
+    --secondary: 48 56% 96%;
+    --secondary-foreground: 0 0% 4%;
 
-    --muted: 250 30% 96%;
-    --muted-foreground: 240 10% 42%;
+    --muted: 44 25% 85%;
+    --muted-foreground: 30 6% 30%;
 
-    --accent: 248 100% 80%;          /* #A29BFE */
-    --accent-foreground: 240 18% 12%;
+    --accent: 73 98% 49%;              /* electric lime */
+    --accent-foreground: 0 0% 4%;
 
-    --destructive: 0 72% 55%;
+    --destructive: 348 100% 59%;       /* hot pink/red */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 250 30% 92%;
-    --input: 250 30% 92%;
-    --ring: 252 75% 64%;
+    --border: 0 0% 4%;                 /* everything bordered in ink */
+    --input: 0 0% 4%;
+    --ring: 252 100% 68%;              /* violet focus */
 
-    --radius: 1rem;
-
-    /* Gradients & effects */
-    --gradient-primary: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
-    --gradient-soft: linear-gradient(180deg, #FFFFFF 0%, #F8F7FF 100%);
-    --gradient-glow: radial-gradient(circle at 50% 0%, rgba(108,92,231,0.12), transparent 60%);
-
-    --shadow-xs: 0 1px 2px rgba(15, 15, 30, 0.04);
-    --shadow-sm: 0 2px 6px rgba(15, 15, 30, 0.05);
-    --shadow-md: 0 8px 24px rgba(15, 15, 30, 0.06);
-    --shadow-lg: 0 16px 40px rgba(15, 15, 30, 0.08);
-    --shadow-glow: 0 10px 40px -10px rgba(108, 92, 231, 0.35);
+    --radius: 0px;                     /* brutalist = sharp */
 
     /* Typography */
     --font-heading: 'Syne', sans-serif;
-    --font-body: 'Outfit', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
+    /* Hard shadow primitives */
+    --sh-2: 2px 2px 0 0 #0A0A0A;
+    --sh-4: 4px 4px 0 0 #0A0A0A;
+    --sh-6: 6px 6px 0 0 #0A0A0A;
+    --sh-8: 8px 8px 0 0 #0A0A0A;
+
     /* Sidebar (preserved for shadcn) */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 18% 12%;
-    --sidebar-primary: 252 75% 64%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 250 50% 97%;
-    --sidebar-accent-foreground: 240 18% 18%;
-    --sidebar-border: 250 30% 92%;
-    --sidebar-ring: 252 75% 64%;
+    --sidebar-background: 48 56% 96%;
+    --sidebar-foreground: 0 0% 4%;
+    --sidebar-primary: 0 0% 4%;
+    --sidebar-primary-foreground: 48 56% 96%;
+    --sidebar-accent: 44 25% 85%;
+    --sidebar-accent-foreground: 0 0% 4%;
+    --sidebar-border: 0 0% 4%;
+    --sidebar-ring: 252 100% 68%;
   }
 }
 
@@ -85,16 +79,16 @@
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
     overflow-x: hidden;
-    background-image:
-      radial-gradient(1200px 600px at 10% -10%, rgba(108, 92, 231, 0.08), transparent 60%),
-      radial-gradient(900px 500px at 110% 10%, rgba(162, 155, 254, 0.10), transparent 60%);
-    background-attachment: fixed;
+    /* hard dot-grid — exposed structure, not soft blobs */
+    background-image: radial-gradient(rgba(10, 10, 10, 0.10) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     color: hsl(var(--foreground));
+    font-weight: 800;
   }
 
   code, .font-mono {
@@ -103,84 +97,92 @@
 }
 
 /* =========================================================
-   Component utilities
+   Brutalist component primitives
    ========================================================= */
 @layer components {
+  /* Bordered, hard-shadowed surface */
+  .brutal-card {
+    @apply bg-paper border-[3px] border-ink;
+    box-shadow: var(--sh-6);
+  }
+
+  .brutal-card-hover {
+    @apply brutal-card transition-[transform,box-shadow] duration-150;
+  }
+  .brutal-card-hover:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 0 #0A0A0A;
+  }
+
+  /* Glass-card name kept for compatibility — now a flat brutalist card */
   .glass-card {
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(16px) saturate(1.3);
-    -webkit-backdrop-filter: blur(16px) saturate(1.3);
-    border: 1px solid rgba(108, 92, 231, 0.10);
-    box-shadow: var(--shadow-sm);
+    @apply bg-paper border-[3px] border-ink;
+    box-shadow: var(--sh-6);
   }
-
   .glass-card-hover {
-    @apply glass-card transition-all duration-300;
+    @apply glass-card transition-[transform,box-shadow] duration-150;
   }
-
   .glass-card-hover:hover {
-    border-color: rgba(108, 92, 231, 0.28);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 0 #0A0A0A;
+  }
+  .card-surface {
+    @apply bg-paper border-[3px] border-ink transition-[transform,box-shadow] duration-150;
+    box-shadow: var(--sh-4);
+  }
+  .card-surface:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 0 #0A0A0A;
   }
 
-  .text-gradient {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
+  /* Buttons — colored block, ink border, press-into-shadow */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all duration-300;
-    background: var(--gradient-primary);
-    box-shadow: 0 8px 24px -8px rgba(108, 92, 231, 0.45);
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-lime text-ink font-bold uppercase tracking-tight border-[3px] border-ink transition-[transform,box-shadow] duration-150;
+    box-shadow: var(--sh-4);
   }
   .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 32px -10px rgba(108, 92, 231, 0.55);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--sh-6);
+  }
+  .btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 #0A0A0A;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300;
-    background: #FFFFFF;
-    color: #6C5CE7;
-    border: 1px solid rgba(108, 92, 231, 0.22);
-    box-shadow: var(--shadow-xs);
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-paper text-ink font-bold uppercase tracking-tight border-[3px] border-ink transition-[transform,box-shadow] duration-150;
+    box-shadow: var(--sh-4);
   }
   .btn-secondary:hover {
-    background: rgba(108, 92, 231, 0.05);
-    border-color: rgba(108, 92, 231, 0.45);
-    transform: translateY(-2px);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--sh-6);
+    @apply bg-lime;
+  }
+  .btn-secondary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 #0A0A0A;
   }
 
   .section-container {
-    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-10;
+    @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-10;
   }
 
+  /* Eyebrow — mono numeric label in an ink block */
   .section-eyebrow {
-    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium;
-    color: #6C5CE7;
-    background: rgba(108, 92, 231, 0.08);
-    border: 1px solid rgba(108, 92, 231, 0.16);
+    @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-mono font-bold uppercase tracking-[0.2em] bg-ink text-paper border-[3px] border-ink;
   }
 
+  /* Tag/pill — bordered, sharp */
   .pill {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-colors;
+    @apply inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-medium border-2 border-ink bg-paper transition-colors;
   }
 
-  .card-surface {
-    background: #FFFFFF;
-    border: 1px solid rgba(15, 15, 30, 0.06);
-    border-radius: 18px;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  }
-  .card-surface:hover {
-    transform: translateY(-4px);
-    border-color: rgba(108, 92, 231, 0.22);
-    box-shadow: var(--shadow-lg);
+  /* Marker highlight — replaces the old gradient text */
+  .text-gradient,
+  .hero-gradient-text {
+    @apply bg-violet text-ink px-1.5;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 }
 
@@ -188,75 +190,56 @@
    Scrollbar & selection
    ========================================================= */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8F7FF;
+  background: #F1EBDA;
+  border-left: 3px solid #0A0A0A;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #A29BFE, #6C5CE7);
-  border-radius: 10px;
-  border: 2px solid #F8F7FF;
+  background: #C7F501;
+  border: 3px solid #0A0A0A;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #8A80F6, #5B4CD4);
+  background: #7C5CFF;
 }
 
 ::selection {
-  background: rgba(108, 92, 231, 0.18);
-  color: #0F0F1E;
+  background: #C7F501;
+  color: #0A0A0A;
 }
 
 /* =========================================================
-   Hero gradient text
+   Animations
    ========================================================= */
-.hero-gradient-text {
-  background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 50%, #8B7FEB 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-shift 8s ease infinite;
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 28s linear infinite;
 }
-
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+.marquee-track.reverse {
+  animation-direction: reverse;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 /* Section reveal fallback */
 .section-reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .section-reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Soft floating keyframes used by components */
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  33% { transform: translateY(-10px) rotate(0.5deg); }
-  66% { transform: translateY(6px) rotate(-0.5deg); }
-}
-
-@keyframes pulse-soft {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 0.6; }
-}
-
-/* Canvas optimization */
 canvas {
   display: block;
-}
-
-/* Subtle separator */
-.soft-separator {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(108,92,231,0.25), transparent);
 }
 
 section {

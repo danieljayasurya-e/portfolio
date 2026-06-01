@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         heading: ['Syne', 'sans-serif'],
-        body: ['Outfit', 'sans-serif'],
+        body: ['Space Grotesk', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
@@ -62,42 +62,61 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        /* Brand purple scale */
-        brand: {
-          50:  "#F5F3FF",
-          100: "#EDE9FE",
-          200: "#DDD6FE",
-          300: "#C4B5FD",
-          400: "#A29BFE",
-          500: "#6C5CE7",
-          600: "#5B4CD4",
-          700: "#4B3EB5",
-          800: "#3B3090",
-          900: "#2A236B",
-        },
+
+        /* ===== Brutalist palette ===== */
         ink: {
-          DEFAULT: "#0F0F1E",
-          muted: "#4A4A5E",
-          soft:  "#6B6B80",
+          DEFAULT: "#0A0A0A",
+          muted: "#3A3A38",
+          soft: "#6B6B66",
+        },
+        paper: {
+          DEFAULT: "#FBF9F0",
+          soft: "#F1EBDA",
+        },
+        cream: "#F1EBDA",
+        /* Maximalist clash accents */
+        lime: "#C7F501",
+        cyan: "#22E0F2",
+        pink: "#FF4D8D",
+        violet: "#7C5CFF",
+        orange: "#FF6A1A",
+        yellow: "#FFD400",
+
+        /* brand kept for any leftover refs (mapped to violet scale) */
+        brand: {
+          50: "#EFEBFF",
+          100: "#DDD4FF",
+          200: "#C4B5FF",
+          300: "#A593FF",
+          400: "#8E78FF",
+          500: "#7C5CFF",
+          600: "#6A48F0",
+          700: "#5736D0",
+          800: "#3F27A0",
+          900: "#2A1A6B",
         },
         surface: {
-          DEFAULT: "#FFFFFF",
-          soft:    "#FAFAFE",
-          tint:    "#F5F3FF",
+          DEFAULT: "#FBF9F0",
+          soft: "#F1EBDA",
+          tint: "#EFEBFF",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-        "2xl": "1.25rem",
-        "3xl": "1.5rem",
+        md: "var(--radius)",
+        sm: "var(--radius)",
       },
       boxShadow: {
-        "soft":  "0 2px 6px rgba(15, 15, 30, 0.05)",
-        "card":  "0 8px 24px rgba(15, 15, 30, 0.06)",
-        "float": "0 16px 40px rgba(15, 15, 30, 0.08)",
-        "glow":  "0 10px 40px -10px rgba(108, 92, 231, 0.35)",
+        "brutal-sm": "2px 2px 0 0 #0A0A0A",
+        "brutal": "4px 4px 0 0 #0A0A0A",
+        "brutal-md": "6px 6px 0 0 #0A0A0A",
+        "brutal-lg": "8px 8px 0 0 #0A0A0A",
+        "brutal-xl": "12px 12px 0 0 #0A0A0A",
+        /* legacy names mapped to brutalist equivalents */
+        "soft": "2px 2px 0 0 #0A0A0A",
+        "card": "4px 4px 0 0 #0A0A0A",
+        "float": "8px 8px 0 0 #0A0A0A",
+        "glow": "4px 4px 0 0 #0A0A0A",
       },
       keyframes: {
         "accordion-down": {
@@ -108,42 +127,24 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-16px)" },
+        "marquee": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
         },
-        "float-slow": {
-          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "33%": { transform: "translateY(-10px) rotate(0.5deg)" },
-          "66%": { transform: "translateY(6px) rotate(-0.5deg)" },
-        },
-        "pulse-soft": {
-          "0%, 100%": { opacity: "0.35" },
-          "50%": { opacity: "0.6" },
-        },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
-        "border-flow": {
-          "0%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-          "100%": { backgroundPosition: "0% 50%" },
+        "blink": {
+          "0%, 49%": { opacity: "1" },
+          "50%, 100%": { opacity: "0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "float": "float 6s ease-in-out infinite",
-        "float-slow": "float-slow 8s ease-in-out infinite",
-        "pulse-soft": "pulse-soft 4s ease-in-out infinite",
-        "shimmer": "shimmer 3s linear infinite",
-        "border-flow": "border-flow 4s ease infinite",
+        "marquee": "marquee 28s linear infinite",
+        "blink": "blink 1s steps(1) infinite",
       },
       backgroundImage: {
-        "brand-gradient": "linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%)",
-        "soft-gradient":  "linear-gradient(180deg, #FFFFFF 0%, #F8F7FF 100%)",
-        "grid-pattern":   "linear-gradient(rgba(108,92,231,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(108,92,231,0.06) 1px, transparent 1px)",
+        "dot-grid": "radial-gradient(rgba(10,10,10,0.10) 1.5px, transparent 1.5px)",
+        "line-grid": "linear-gradient(rgba(10,10,10,0.08) 2px, transparent 2px), linear-gradient(90deg, rgba(10,10,10,0.08) 2px, transparent 2px)",
       },
     },
   },

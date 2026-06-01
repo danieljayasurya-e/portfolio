@@ -1,152 +1,114 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { MapPin, Briefcase, Code2 } from "lucide-react";
+import { MapPin, Briefcase, Code2, Linkedin } from "lucide-react";
 
 const stats = [
-  { value: "2.5+", label: "Years Experience" },
-  { value: "35%", label: "Load Time Reduced" },
-  { value: "40%", label: "DB Query Boost" },
-  { value: "5K+", label: "Concurrent Users" },
+  { value: "2.5+", label: "YEARS EXPERIENCE", c: "bg-lime" },
+  { value: "35%", label: "LOAD TIME CUT", c: "bg-cyan" },
+  { value: "40%", label: "DB QUERY BOOST", c: "bg-pink" },
+  { value: "5K+", label: "CONCURRENT USERS", c: "bg-yellow" },
 ];
-
-const CountUp = ({ target }: { target: string; suffix?: string }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <motion.span
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : {}}
-    >
-      {isInView ? (
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {target}
-        </motion.span>
-      ) : "0"}
-    </motion.span>
-  );
-};
 
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-28 relative overflow-hidden">
-      {/* subtle background accents */}
-      <div className="absolute top-10 right-0 w-[480px] h-[480px] bg-brand-200/25 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[380px] h-[380px] bg-brand-300/20 rounded-full blur-[100px] pointer-events-none" />
-
-      <div ref={ref} className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+    <section id="about" className="py-24 relative overflow-hidden">
+      <div ref={ref} className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex flex-col items-start gap-3 mb-14"
+          className="flex flex-col items-start gap-4 mb-12"
         >
-          <span className="section-eyebrow">01 — About</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight font-heading">
-            Crafting robust products,<br className="hidden sm:block" />
-            <span className="hero-gradient-text">one scalable system at a time.</span>
+          <span className="section-eyebrow">01 / ABOUT</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink uppercase tracking-tighter leading-[0.95] font-heading">
+            Crafting robust products,
+            <br className="hidden sm:block" />{" "}
+            <span className="bg-lime text-ink px-2 inline-block -rotate-1 border-[3px] border-ink shadow-brutal mt-2">
+              one scalable system at a time.
+            </span>
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Bio */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.15, duration: 0.6 }}
-            className="space-y-5 text-ink-muted text-base leading-relaxed"
+            transition={{ delay: 0.15, duration: 0.5 }}
+            className="brutal-card p-7 lg:p-8 space-y-5 font-mono text-ink-muted text-sm sm:text-[15px] leading-relaxed"
           >
             <p>
-              Hey, I'm{" "}
-              <span className="text-brand-600 font-semibold">Daniel Jayasurya</span> — a
-              results-driven{" "}
-              <span className="text-ink font-semibold">Full Stack Engineer (MERN)</span>{" "}
-              based in <span className="text-ink font-semibold">Coimbatore, Tamil Nadu</span>.
-              I specialize in crafting dynamic, responsive frontends and robust backends
-              that solve real business problems — not just ship features.
+              Hey, I'm <span className="bg-violet text-ink px-1 font-bold">Daniel Jayasurya</span> — a
+              results-driven <span className="text-ink font-bold">Full Stack Engineer (MERN)</span> based
+              in <span className="text-ink font-bold">Coimbatore, Tamil Nadu</span>. I build dynamic
+              frontends and robust backends that solve real business problems — not just ship features.
             </p>
             <p>
-              Currently working at{" "}
-              <span className="text-brand-600 font-semibold">Praathee Technologies Pvt Ltd</span>,
-              I build enterprise-grade scalable web applications using React.js, Node.js,
-              PostgreSQL, and Docker. I've reduced app load time by{" "}
-              <span className="text-brand-600 font-semibold">35%</span> and improved DB
-              query performance by{" "}
-              <span className="text-brand-600 font-semibold">40%</span> in production.
+              Currently at <span className="bg-cyan text-ink px-1 font-bold">Praathee Technologies</span>,
+              I build enterprise-grade scalable apps with React, Node, PostgreSQL & Docker. I've cut app
+              load time by <span className="text-ink font-bold">35%</span> and improved DB query
+              performance by <span className="text-ink font-bold">40%</span> in production.
             </p>
             <p>
-              I'm passionate about building{" "}
-              <span className="text-brand-600 font-semibold">SaaS & AI-assisted web apps</span>,
-              turning complex systems into scalable products, and sharing knowledge with
-              the developer community. Open to{" "}
-              <span className="text-brand-600 font-semibold">
-                freelance and contract opportunities
-              </span>
-              .
+              From an <span className="text-ink font-bold">ECE background</span> to full-time engineering
+              to freelancing — I'm passionate about <span className="bg-pink text-ink px-1 font-bold">SaaS & AI-assisted apps</span> and
+              actively share what I build with the dev community on LinkedIn.
             </p>
 
-            <div className="flex flex-wrap gap-2 pt-3">
+            <div className="flex flex-wrap gap-2 pt-2">
               {[
-                { icon: MapPin, text: "Coimbatore, Tamil Nadu" },
+                { icon: MapPin, text: "Coimbatore, TN" },
                 { icon: Briefcase, text: "Open to Freelance" },
-                { icon: Code2, text: "React · Node · Postgres · Next.js" },
+                { icon: Code2, text: "React · Node · Postgres" },
+                { icon: Linkedin, text: "Content Creator" },
               ].map(({ icon: Icon, text }) => (
-                <motion.span
+                <span
                   key={text}
-                  whileHover={{ y: -2 }}
-                  className="inline-flex items-center gap-2 text-sm px-3.5 py-2 rounded-full bg-white border border-brand-100 shadow-soft text-ink-muted hover:border-brand-300 hover:shadow-card transition-all cursor-default"
+                  className="inline-flex items-center gap-2 text-xs font-bold uppercase px-3 py-2 border-[3px] border-ink bg-paper text-ink"
                 >
-                  <Icon size={14} className="text-brand-500" />
+                  <Icon size={13} />
                   {text}
-                </motion.span>
+                </span>
               ))}
             </div>
           </motion.div>
 
+          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.25, duration: 0.6 }}
+            transition={{ delay: 0.25, duration: 0.5 }}
             className="grid grid-cols-2 gap-4"
           >
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 24, scale: 0.96 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ delay: 0.35 + i * 0.08 }}
-                whileHover={{ y: -4 }}
-                className="card-surface p-6 group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.3 + i * 0.08 }}
+                whileHover={{ x: -3, y: -3 }}
+                className={`${stat.c} border-[3px] border-ink shadow-brutal p-6 transition-shadow hover:shadow-brutal-lg`}
               >
-                <p className="text-4xl font-bold text-gradient font-heading mb-1">
-                  <CountUp target={stat.value} />
-                </p>
-                <p className="text-sm text-ink-soft">{stat.label}</p>
+                <p className="text-4xl sm:text-5xl font-extrabold text-ink font-heading">{stat.value}</p>
+                <p className="text-xs font-mono font-bold text-ink/80 mt-1 tracking-wider">{stat.label}</p>
               </motion.div>
             ))}
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.75 }}
-              whileHover={{ y: -3 }}
-              className="col-span-2 p-5 rounded-[18px] bg-brand-gradient flex items-center gap-4 shadow-glow relative overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.7 }}
+              whileHover={{ x: -3, y: -3 }}
+              className="col-span-2 p-5 bg-ink border-[3px] border-ink shadow-brutal flex items-center gap-4 transition-shadow hover:shadow-brutal-lg"
             >
-              <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_80%_20%,#fff,transparent_60%)] pointer-events-none" />
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 text-white font-bold text-lg ring-1 ring-white/30 relative z-10">
+              <div className="w-12 h-12 bg-lime border-[3px] border-paper grid place-items-center shrink-0 text-ink font-extrabold text-lg font-heading">
                 DJ
               </div>
-              <div className="relative z-10">
-                <p className="text-white font-semibold">Daniel Jayasurya E</p>
-                <p className="text-white/85 text-sm">
-                  Full Stack Engineer @ Praathee Technologies
-                </p>
+              <div>
+                <p className="text-paper font-bold uppercase tracking-tight">Daniel Jayasurya E</p>
+                <p className="text-paper/70 text-sm font-mono">Full Stack Engineer @ Praathee Technologies</p>
               </div>
             </motion.div>
           </motion.div>

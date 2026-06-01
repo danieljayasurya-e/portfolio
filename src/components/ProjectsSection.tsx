@@ -1,13 +1,15 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Github, ArrowUpRight, Star, Sparkles, Loader2, Folder } from "lucide-react";
 import { useProjectSummary } from "../hooks/useProjectSummary";
 
+const accents = ["bg-lime", "bg-cyan", "bg-pink", "bg-violet", "bg-yellow"];
+
 const projects = [
   {
-    title: "MHCET Student Course Registration & Admissions Platform",
+    title: "MHCET Admissions & Course Registration Platform",
     description:
-      "Large-scale enterprise app managing student course registration and admissions for thousands. Microservices architecture with Student Portal, Back Office, CAP, and CAP Verifiers modules. Implemented Redis caching, PostgreSQL with stored procedures, and TanStack Query — achieved 99.9% uptime.",
+      "Large-scale enterprise app managing student registration and admissions for thousands. Microservices with Student Portal, Back Office, CAP & CAP Verifier modules. Redis caching, PostgreSQL stored procedures, TanStack Query — 99.9% uptime.",
     tech: ["React.js", "Redux-Saga", "TanStack Query", "Node.js", "PostgreSQL", "Redis", "Material-UI"],
     github: "https://github.com/danieljayasurya",
     live: "#",
@@ -16,8 +18,8 @@ const projects = [
   {
     title: "MHCET Test Engine – Online Assessment Platform",
     description:
-      "Comprehensive online test-taking platform with advanced proctoring for 5,000+ concurrent users. Hybrid React + Angular architecture. Timed assessments, question navigation, auto-save, browser lockdown, and real-time monitoring via Redux-Saga.",
-    tech: ["React.js", "Redux-Saga", "Angular", "Material-UI", "Proctoring Systems"],
+      "Online test-taking platform with advanced proctoring for 5,000+ concurrent users. Hybrid React + Angular architecture. Timed assessments, question navigation, auto-save, browser lockdown, and real-time monitoring via Redux-Saga.",
+    tech: ["React.js", "Redux-Saga", "Angular", "Material-UI", "Proctoring"],
     github: "https://github.com/danieljayasurya",
     live: "#",
     featured: true,
@@ -25,7 +27,7 @@ const projects = [
   {
     title: "DWG Editor – ODA Drawing SDK",
     description:
-      "Web application to open, view, and edit DWG/CAD files by integrating the licensed ODA Drawing SDK. Project and document management modules, smooth rendering of large CAD files with optimized data fetching.",
+      "Web app to open, view & edit DWG/CAD files via the licensed ODA Drawing SDK. Project & document management modules with smooth rendering of large CAD files and optimized data fetching.",
     tech: ["React.js", "TypeScript", "TanStack Query", "Tailwind CSS", "ODA SDK"],
     github: "https://github.com/danieljayasurya",
     live: "#",
@@ -34,8 +36,8 @@ const projects = [
   {
     title: "PRA CRM – Customer Relationship Management",
     description:
-      "SaaS-based CRM application for client interactions and sales pipeline management. Lead management, contact tracking, opportunity pipeline, activity logging. Increased sales conversion rates by 25% through automation.",
-    tech: ["React.js", "Redux-Saga", "Node.js", "MySQL", "Express.js", "React-Bootstrap"],
+      "SaaS CRM for client interactions and sales pipeline management. Lead management, contact tracking, opportunity pipeline, activity logging. Increased sales conversion rates by 25% through automation.",
+    tech: ["React.js", "Redux-Saga", "Node.js", "MySQL", "Express.js"],
     github: "https://github.com/danieljayasurya",
     live: "#",
     featured: false,
@@ -43,44 +45,13 @@ const projects = [
   {
     title: "CONNECT ATS – Applicant Tracking System",
     description:
-      "Talent acquisition platform streamlining hiring processes. Candidate pipeline management, automated email notifications, interview scheduling, and advanced filtering. Reduced time-to-hire by 30%.",
-    tech: ["React.js", "Redux", "Node.js", "MongoDB", "Express.js", "Material-UI"],
+      "Talent acquisition platform streamlining hiring. Candidate pipeline management, automated email notifications, interview scheduling, advanced filtering. Reduced time-to-hire by 30%.",
+    tech: ["React.js", "Redux", "Node.js", "MongoDB", "Express.js"],
     github: "https://github.com/danieljayasurya",
     live: "#",
     featured: false,
   },
 ];
-
-const TiltCard = ({ children, className }: { children: React.ReactNode; className: string }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState("");
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 40;
-    const rotateY = (centerX - x) / 40;
-    setTransform(`perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`);
-  };
-
-  const handleMouseLeave = () => setTransform("");
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transform, transition: transform ? "transform 0.1s ease" : "transform 0.5s ease" }}
-      className={className}
-    >
-      {children}
-    </div>
-  );
-};
 
 const ProjectsSection = () => {
   const { summaries, loading, generateSummary } = useProjectSummary();
@@ -88,92 +59,89 @@ const ProjectsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" className="py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-surface-soft to-white pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-brand-200/25 rounded-full blur-[140px] pointer-events-none" />
-
-      <div ref={ref} className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+    <section id="projects" className="py-24 relative overflow-hidden border-t-[3px] border-ink bg-paper-soft">
+      <div ref={ref} className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex flex-col items-start gap-3 mb-14"
+          className="flex flex-col items-start gap-4 mb-12"
         >
-          <span className="section-eyebrow">04 — Projects</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight font-heading">
-            Selected work & <span className="hero-gradient-text">case studies</span>
+          <span className="section-eyebrow">04 / PROJECTS</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink uppercase tracking-tighter leading-[0.95] font-heading">
+            Selected work &{" "}
+            <span className="bg-violet text-ink px-2 inline-block -rotate-1 border-[3px] border-ink shadow-brutal">
+              case studies
+            </span>
           </h2>
-          <p className="text-ink-muted text-base max-w-2xl">
-            A glimpse into production systems I've built, shipped, and scaled — from admissions platforms to CAD editors.
+          <p className="text-ink-muted text-sm sm:text-base font-mono max-w-2xl">
+            Production systems I've built, shipped & scaled — from admissions platforms to CAD editors.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 auto-rows-fr">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 + i * 0.1, duration: 0.6 }}
-              className="h-full"
-            >
-              <TiltCard className="card-surface relative p-7 flex flex-col h-full group overflow-hidden">
-                {/* subtle hover wash */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand-50 to-transparent pointer-events-none" />
-
+          {projects.map((project, i) => {
+            const accent = accents[i % accents.length];
+            return (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.1 + i * 0.08, duration: 0.45 }}
+                whileHover={{ x: -4, y: -4 }}
+                className="brutal-card-hover relative p-6 lg:p-7 flex flex-col h-full"
+              >
                 {project.featured && (
-                  <div className="absolute top-5 right-5 inline-flex items-center gap-1 text-[11px] font-medium text-brand-700 bg-brand-50 border border-brand-200 px-2.5 py-1 rounded-full">
-                    <Star size={10} fill="currentColor" />
+                  <div className="absolute -top-3 -right-3 inline-flex items-center gap-1 text-[11px] font-mono font-bold uppercase text-ink bg-yellow border-[3px] border-ink px-2.5 py-1 rotate-3 shadow-brutal-sm">
+                    <Star size={11} fill="currentColor" />
                     Featured
                   </div>
                 )}
 
-                <div className="relative flex items-center gap-3 mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-brand-gradient text-white grid place-items-center shadow-glow">
-                    <Folder size={18} />
+                <div className="flex items-center gap-3 mb-5">
+                  <div className={`w-12 h-12 ${accent} border-[3px] border-ink grid place-items-center text-ink`}>
+                    <Folder size={20} />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <motion.a
+                  <div className="flex items-center gap-2 ml-auto">
+                    <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ y: -2 }}
-                      className="p-2 rounded-xl bg-white border border-brand-100 text-ink-muted hover:text-brand-600 hover:border-brand-300 transition-all"
+                      className="p-2 border-[3px] border-ink bg-paper text-ink hover:bg-lime transition-colors"
                       aria-label="View source on GitHub"
                     >
-                      <Github size={14} />
-                    </motion.a>
+                      <Github size={15} />
+                    </a>
                     {project.live && project.live !== "#" && (
-                      <motion.a
+                      <a
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ y: -2 }}
-                        className="p-2 rounded-xl bg-white border border-brand-100 text-ink-muted hover:text-brand-600 hover:border-brand-300 transition-all"
+                        className="p-2 border-[3px] border-ink bg-paper text-ink hover:bg-lime transition-colors"
                         aria-label="View live project"
                       >
-                        <ArrowUpRight size={14} />
-                      </motion.a>
+                        <ArrowUpRight size={15} />
+                      </a>
                     )}
                   </div>
                 </div>
 
-                <h3 className="relative text-lg font-bold text-ink mb-3 font-heading leading-snug group-hover:text-brand-700 transition-colors">
+                <h3 className="text-lg sm:text-xl font-extrabold text-ink mb-3 font-heading uppercase tracking-tight leading-tight">
                   {project.title}
                 </h3>
 
-                <p className="relative text-ink-muted text-sm leading-relaxed flex-1 mb-5">
+                <p className="text-ink-muted text-sm font-mono leading-relaxed flex-1 mb-5">
                   {project.description}
                 </p>
 
-                <div className="relative mb-5 min-h-[40px]">
+                <div className="mb-5 min-h-[40px]">
                   {summaries[project.title] ? (
                     <motion.div
                       initial={{ opacity: 0, y: 4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="flex items-start gap-2 px-3 py-2 rounded-xl bg-brand-50 border border-brand-100"
+                      className="flex items-start gap-2 px-3 py-2.5 bg-violet border-[3px] border-ink"
                     >
-                      <Sparkles size={12} className="text-brand-600 mt-0.5 shrink-0" />
-                      <p className="text-xs text-brand-700 italic leading-relaxed">
+                      <Sparkles size={13} className="text-ink mt-0.5 shrink-0" />
+                      <p className="text-xs text-ink font-mono font-medium leading-relaxed">
                         {summaries[project.title]}
                       </p>
                     </motion.div>
@@ -181,16 +149,16 @@ const ProjectsSection = () => {
                     <button
                       onClick={() => generateSummary(project.title, project.tech)}
                       disabled={loading[project.title]}
-                      className="inline-flex items-center gap-1.5 text-xs text-ink-soft hover:text-brand-600 border border-brand-100 hover:border-brand-300 px-3 py-1.5 rounded-full bg-white hover:bg-brand-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase text-ink border-[3px] border-ink px-3 py-1.5 bg-paper hover:bg-lime transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {loading[project.title] ? (
                         <>
-                          <Loader2 size={11} className="animate-spin text-brand-600" />
-                          <span className="text-brand-600">Generating...</span>
+                          <Loader2 size={12} className="animate-spin" />
+                          Generating…
                         </>
                       ) : (
                         <>
-                          <Sparkles size={11} />
+                          <Sparkles size={12} />
                           Generate AI Summary
                         </>
                       )}
@@ -198,38 +166,36 @@ const ProjectsSection = () => {
                   )}
                 </div>
 
-                <div className="relative flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1.5">
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 text-[11px] font-mono font-medium text-brand-700 bg-brand-50 rounded-md border border-brand-100"
+                      className="px-2 py-1 text-[11px] font-mono font-bold uppercase text-ink bg-paper border-2 border-ink"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-              </TiltCard>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 0.6 }}
           className="text-center mt-12"
         >
-          <motion.a
+          <a
             href="https://github.com/danieljayasurya"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
             className="btn-secondary"
           >
             <Github size={16} />
             View More on GitHub
-          </motion.a>
+          </a>
         </motion.div>
       </div>
     </section>

@@ -97,31 +97,34 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-28 relative overflow-hidden">
+    <section id="contact" className="py-24 relative overflow-hidden border-t-[3px] border-ink">
       <Toaster
         position="top-right"
         toastOptions={{
           style: {
-            background: "#FFFFFF",
-            color: "#0F0F1E",
-            border: "1px solid rgba(108,92,231,0.22)",
-            boxShadow: "0 10px 30px rgba(15,15,30,0.08)",
+            background: "#FBF9F0",
+            color: "#0A0A0A",
+            border: "3px solid #0A0A0A",
+            borderRadius: "0px",
+            boxShadow: "6px 6px 0 0 #0A0A0A",
+            fontFamily: "'JetBrains Mono', monospace",
+            fontWeight: 600,
           },
         }}
       />
 
-      <div className="absolute bottom-0 right-1/4 w-[380px] h-[380px] bg-brand-200/30 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute top-1/3 left-0 w-[260px] h-[260px] bg-brand-300/25 rounded-full blur-[80px] pointer-events-none" />
-
-      <div ref={ref} className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+      <div ref={ref} className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 relative">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex flex-col items-start gap-3 mb-14"
+          className="flex flex-col items-start gap-4 mb-12"
         >
-          <span className="section-eyebrow">05 — Contact</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight font-heading">
-            Let's build something <span className="hero-gradient-text">exceptional</span>
+          <span className="section-eyebrow">05 / CONTACT</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink uppercase tracking-tighter leading-[0.95] font-heading">
+            Let's build something{" "}
+            <span className="bg-orange text-ink px-2 inline-block -rotate-1 border-[3px] border-ink shadow-brutal">
+              exceptional
+            </span>
           </h2>
         </motion.div>
 
@@ -133,12 +136,12 @@ const ContactSection = () => {
             transition={{ delay: 0.15, duration: 0.6 }}
             className="lg:col-span-2"
           >
-            <p className="text-ink-muted mb-8 leading-relaxed">
-              I'm open to{" "}
-              <span className="text-brand-600 font-semibold">freelance and contract</span>{" "}
-              opportunities. Fill the form — you'll get an{" "}
-              <span className="text-brand-600 font-semibold">AI-generated instant reply</span>{" "}
-              from me while I prepare a proper response.
+            <p className="text-ink-muted font-mono text-sm mb-8 leading-relaxed">
+              Open to{" "}
+              <span className="bg-lime text-ink px-1 font-bold">freelance & contract</span>{" "}
+              work. Fill the form — you'll get an{" "}
+              <span className="bg-cyan text-ink px-1 font-bold">AI-generated instant reply</span>{" "}
+              while I prepare a proper response.
             </p>
 
             <div className="space-y-3 mb-8">
@@ -157,26 +160,27 @@ const ContactSection = () => {
                 <motion.a
                   key={label}
                   href={href}
-                  whileHover={{ x: 4 }}
-                  className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-brand-100 hover:border-brand-300 hover:shadow-card transition-all group"
+                  whileHover={{ x: -3, y: -3 }}
+                  className="flex items-center gap-3 p-4 bg-paper border-[3px] border-ink shadow-brutal-sm hover:shadow-brutal transition-shadow group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-brand-gradient text-white grid place-items-center shadow-glow shrink-0">
+                  <div className="w-10 h-10 bg-lime border-[3px] border-ink text-ink grid place-items-center shrink-0">
                     <Icon size={15} />
                   </div>
-                  <div className="text-ink font-medium text-sm group-hover:text-brand-700 transition-colors">
+                  <div className="text-ink font-mono font-bold text-sm break-all">
                     {label}
                   </div>
                 </motion.a>
               ))}
             </div>
 
-            <div className="rounded-2xl p-5 bg-brand-gradient text-white relative overflow-hidden">
-              <div className="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_top_right,#fff,transparent_60%)]" />
-              <div className="relative flex items-start gap-3">
-                <Sparkles size={18} className="mt-0.5 shrink-0" />
+            <div className="p-5 bg-ink border-[3px] border-ink shadow-brutal relative">
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 bg-lime border-2 border-paper grid place-items-center shrink-0">
+                  <Sparkles size={16} className="text-ink" />
+                </div>
                 <div>
-                  <p className="font-semibold text-sm mb-1">Response in 24 hours</p>
-                  <p className="text-white/85 text-xs leading-relaxed">
+                  <p className="font-heading font-extrabold uppercase text-paper text-sm mb-1">Response in 24 hours</p>
+                  <p className="text-paper/70 text-xs font-mono leading-relaxed">
                     I read every inquiry personally. Expect a thoughtful reply — not a template.
                   </p>
                 </div>
@@ -194,7 +198,7 @@ const ContactSection = () => {
             <form
               ref={formRef}
               onSubmit={handleSubmit(onSubmit)}
-              className="card-surface p-7 lg:p-8 space-y-5"
+              className="brutal-card p-6 lg:p-8 space-y-5"
             >
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
@@ -202,17 +206,17 @@ const ContactSection = () => {
                   { name: "email", label: "Your Email", placeholder: "john@example.com", type: "email" },
                 ].map((field) => (
                   <div key={field.name}>
-                    <label className="text-xs font-medium text-ink-muted mb-1.5 block">
+                    <label className="text-xs font-mono font-bold uppercase tracking-wider text-ink mb-2 block">
                       {field.label}
                     </label>
                     <input
                       {...register(field.name as keyof FormData)}
                       type={field.type}
                       placeholder={field.placeholder}
-                      className="w-full bg-surface-soft border border-brand-100 rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-soft/80 focus:outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100 transition-all duration-200"
+                      className="w-full bg-paper-soft border-[3px] border-ink px-4 py-3 text-sm font-mono text-ink placeholder-ink-soft/70 focus:outline-none focus:bg-paper focus:shadow-brutal-sm transition-shadow"
                     />
                     {errors[field.name as keyof FormData] && (
-                      <p className="text-red-500 text-xs mt-1.5">
+                      <p className="text-pink bg-ink inline-block px-1.5 py-0.5 font-mono text-xs mt-2">
                         {errors[field.name as keyof FormData]?.message}
                       </p>
                     )}
@@ -221,46 +225,45 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="text-xs font-medium text-ink-muted mb-1.5 block">
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-ink mb-2 block">
                   Subject
                 </label>
                 <input
                   {...register("subject")}
                   type="text"
                   placeholder="Project Inquiry"
-                  className="w-full bg-surface-soft border border-brand-100 rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-soft/80 focus:outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100 transition-all duration-200"
+                  className="w-full bg-paper-soft border-[3px] border-ink px-4 py-3 text-sm font-mono text-ink placeholder-ink-soft/70 focus:outline-none focus:bg-paper focus:shadow-brutal-sm transition-shadow"
                 />
                 {errors.subject && (
-                  <p className="text-red-500 text-xs mt-1.5">{errors.subject.message}</p>
+                  <p className="text-pink bg-ink inline-block px-1.5 py-0.5 font-mono text-xs mt-2">{errors.subject.message}</p>
                 )}
               </div>
 
               <div>
-                <label className="text-xs font-medium text-ink-muted mb-1.5 block">
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-ink mb-2 block">
                   Message
                 </label>
                 <textarea
                   {...register("message")}
                   rows={5}
                   placeholder="Tell me about your project..."
-                  className="w-full bg-surface-soft border border-brand-100 rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-soft/80 focus:outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100 transition-all duration-200 resize-none"
+                  className="w-full bg-paper-soft border-[3px] border-ink px-4 py-3 text-sm font-mono text-ink placeholder-ink-soft/70 focus:outline-none focus:bg-paper focus:shadow-brutal-sm transition-shadow resize-none"
                 />
                 {errors.message && (
-                  <p className="text-red-500 text-xs mt-1.5">{errors.message.message}</p>
+                  <p className="text-pink bg-ink inline-block px-1.5 py-0.5 font-mono text-xs mt-2">{errors.message.message}</p>
                 )}
               </div>
 
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                whileTap={{ x: 2, y: 2 }}
                 className="btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />
-                    Sending & Generating Reply...
+                    Sending & Generating Reply…
                   </>
                 ) : (
                   <>
@@ -270,8 +273,8 @@ const ContactSection = () => {
                 )}
               </motion.button>
 
-              <p className="text-xs text-ink-soft text-center">
-                You'll receive an AI-generated reply instantly
+              <p className="text-xs font-mono text-ink-soft text-center uppercase tracking-wider">
+                ⚡ Instant AI-generated reply
               </p>
             </form>
           </motion.div>

@@ -14,16 +14,16 @@ const CalendlyButton = ({ variant = "default" }: Props) => {
     <>
       <motion.button
         onClick={() => setIsOpen(true)}
-        whileHover={{ y: -2 }}
-        whileTap={{ scale: 0.97 }}
+        whileHover={{ x: -2, y: -2 }}
+        whileTap={{ x: 2, y: 2 }}
         className={
           variant === "outline"
-            ? "inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand-600 bg-white border border-brand-200 rounded-xl hover:bg-brand-50 hover:border-brand-300 transition-all"
-            : "btn-primary !px-5 !py-2.5 text-sm"
+            ? "inline-flex items-center gap-2 px-4 py-2.5 text-sm font-mono font-bold uppercase text-ink bg-paper border-[3px] border-ink shadow-brutal-sm transition-shadow hover:shadow-brutal"
+            : "inline-flex items-center gap-2 px-5 py-2.5 text-sm font-mono font-bold uppercase text-ink bg-violet border-[3px] border-ink shadow-brutal-sm transition-shadow hover:shadow-brutal"
         }
       >
         <Calendar size={14} />
-        Schedule a Call
+        Book a Call
       </motion.button>
 
       {isOpen && (
